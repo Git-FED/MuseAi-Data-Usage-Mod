@@ -1,5 +1,7 @@
 # Token Usage Moderation
 
+<img width="1328" height="727" alt="Screenshot 2026-10-27 205824" src="https://github.com/user-attachments/assets/a71b8c1f-b8a4-4281-94d2-c4c6152a2c44" />
+
 A small, offline Python tool for evaluating manually supplied token-usage pulls against explicitly approved daily token cuts.
 
 The static landing page is in `site/`. See [DEPLOYMENT.md](DEPLOYMENT.md) for Cloudflare Workers, Cloudflare Pages, and GitHub Pages publishing options.
