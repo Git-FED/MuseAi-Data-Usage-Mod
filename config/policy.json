@@ -1,0 +1,12 @@
+{
+  "thresholds": [
+    {"percent": 25, "signal": "WATCH", "action": "Log and monitor; no automatic change."},
+    {"percent": 50, "signal": "REVIEW", "action": "Review the remaining allowance."},
+    {"percent": 75, "signal": "PAUSE_NONESSENTIAL", "action": "Pause non-essential work pending a human decision."}
+  ],
+  "cap_percent": 100,
+  "cap_signal": "CAP_REACHED",
+  "pull_mode_required": "MANUAL",
+  "verification_required": "VERIFIED",
+  "automation_enabled": false
+}

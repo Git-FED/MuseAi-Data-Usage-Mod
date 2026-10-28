@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101923">
+  <meta name="description" content="A tiny offline Python CLI that reports token-usage thresholds from manually supplied, verified records and explicitly approved daily cuts. No fetching. No automatic enforcement.">
+  <meta property="og:title" content="Token Usage Moderation — calm, human-first guardrails">
+  <meta property="og:description" content="Manual pulls. Approved cuts. Verified records. Clear signals, human decisions.">
+  <meta property="og:image" content="./assets/token-budget-comic.webp">
+  <title>Token Usage Moderation — Calm, human-first guardrails</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Token Usage Moderation home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" role="img">
+          <rect x="3" y="3" width="34" height="34" rx="11" fill="currentColor" />
+          <path d="M12 14h16M20 11v18M13 25h14" fill="none" stroke="#101923" stroke-width="3" stroke-linecap="round" />
+          <circle cx="20" cy="20" r="3" fill="#ff795d" />
+        </svg>
+      </span>
+      <span class="brand-name">token usage <b>moderation</b></span>
+    </a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#protocol">Protocol</a>
+      <a href="#workflow">How it works</a>
+      <a class="nav-pill" href="#limits">No magic, just math <span aria-hidden="true">↘</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> A tiny offline CLI for token usage</p>
+        <h1 id="hero-title">A calm little checkpoint for <span>token usage.</span></h1>
+        <p class="hero-lede">Bring a manual usage pull. Compare it with a daily cut you actually approved. Get a clear signal—and keep every decision human.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#protocol">Meet the guardrails <span aria-hidden="true">↓</span></a>
+          <a class="text-link" href="#workflow">See the simple workflow <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-notes" aria-label="Design principles">
+          <span><i aria-hidden="true">✓</i> Offline by design</span>
+          <span><i aria-hidden="true">✓</i> Human decisions</span>
+        </div>
+      </div>
+      <figure class="hero-art">
+        <img src="./assets/token-budget-comic.webp" alt="A serious raccoon in an orange safety vest manually checks a paper token ledger beside a nearly full jar of colorful tokens.">
+        <figcaption><span class="caption-dot"></span> The raccoon is not authorized to change your quota.</figcaption>
+      </figure>
+      <div class="hero-stamp" aria-hidden="true"><span>NO<br>API<br>MAGIC</span><b>✳</b></div>
+    </section>
+
+    <section class="trust-strip section-wrap" aria-label="Project facts">
+      <div><span class="strip-label">Runs local</span><strong>Python 3.10+</strong></div>
+      <div><span class="strip-label">Dependencies</span><strong>None</strong></div>
+      <div><span class="strip-label">Pulls</span><strong>Manual only</strong></div>
+      <div><span class="strip-label">Actions</span><strong>Human only</strong></div>
+    </section>
+
+    <section class="protocol-section section-wrap" id="protocol" aria-labelledby="protocol-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / the protocol</p>
+          <h2 id="protocol-title">Three nudges. <span>No autopilot.</span></h2>
+        </div>
+        <p>Signals stack as usage crosses each threshold. They’re a report for a person—not a switch that changes anything.</p>
+      </div>
+      <div class="signal-grid">
+        <article class="signal-card signal-watch">
+          <div class="signal-top"><span class="signal-number">25<span>%</span></span><span class="signal-icon" aria-hidden="true">◉</span></div>
+          <p class="signal-code">SIGNAL / WATCH</p>
+          <h3>Keep an eye on it.</h3>
+          <p>Log and monitor. No automatic change.</p>
+          <div class="meter" aria-hidden="true"><span style="width:25%"></span></div>
+        </article>
+        <article class="signal-card signal-review">
+          <div class="signal-top"><span class="signal-number">50<span>%</span></span><span class="signal-icon" aria-hidden="true">⌕</span></div>
+          <p class="signal-code">SIGNAL / REVIEW</p>
+          <h3>Take a second look.</h3>
+          <p>Review the remaining allowance.</p>
+          <div class="meter" aria-hidden="true"><span style="width:50%"></span></div>
+        </article>
+        <article class="signal-card signal-pause">
+          <div class="signal-top"><span class="signal-number">75<span>%</span></span><span class="signal-icon" aria-hidden="true">Ⅱ</span></div>
+          <p class="signal-code">SIGNAL / PAUSE_NONESSENTIAL</p>
+          <h3>Pause the extras.</h3>
+          <p>Pause non-essential work pending a human decision.</p>
+          <div class="meter" aria-hidden="true"><span style="width:75%"></span></div>
+        </article>
+      </div>
+      <div class="cap-note">
+        <div class="cap-mark" aria-hidden="true">100<span>%</span></div>
+        <div><p class="signal-code">CAP / CAP_REACHED</p><p><strong>At the approved daily cut:</strong> don’t authorize usage beyond it without a human decision.</p></div>
+        <span class="cap-aside">A limit is a limit.<br>Even for raccoons.</span>
+      </div>
+    </section>
+
+    <section class="guardrails-section" id="limits" aria-labelledby="guardrails-title">
+      <div class="section-wrap guardrails-inner">
+        <div class="section-heading section-heading-light">
+          <div>
+            <p class="eyebrow">02 / the boring bits that matter</p>
+            <h2 id="guardrails-title">Small tool.<br><span>Very clear boundaries.</span></h2>
+          </div>
+          <p>Four requirements keep the numbers grounded in what a human approved and actually supplied.</p>
+        </div>
+        <div class="guardrail-list">
+          <article class="guardrail-item">
+            <span class="guardrail-index">01</span>
+            <div><h3>25 / 50 / 75, in order</h3><p>WATCH at 25%, REVIEW at 50%, and PAUSE_NONESSENTIAL at 75%. At 100%, report CAP_REACHED.</p></div>
+            <span class="guardrail-check" aria-hidden="true">✓</span>
+          </article>
+          <article class="guardrail-item">
+            <span class="guardrail-index">02</span>
+            <div><h3>An approved cut—or no evaluation</h3><p>Each date needs a valid APPROVED daily cut. The starter registry is empty on purpose; no limit is invented.</p></div>
+            <span class="guardrail-check" aria-hidden="true">✓</span>
+          </article>
+          <article class="guardrail-item">
+            <span class="guardrail-index">03</span>
+            <div><h3>Manual pulls only</h3><p>Supply the usage JSON yourself with <code>pull_mode: MANUAL</code>. The tool does not connect to services or fetch usage.</p></div>
+            <span class="guardrail-check" aria-hidden="true">✓</span>
+          </article>
+          <article class="guardrail-item">
+            <span class="guardrail-index">04</span>
+            <div><h3>VERIFIED means exactly VERIFIED</h3><p>Only VERIFIED rows for the requested date count. Unverified, malformed, duplicate, and out-of-date rows are excluded and reported.</p></div>
+            <span class="guardrail-check" aria-hidden="true">✓</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow-section section-wrap" id="workflow" aria-labelledby="workflow-title">
+      <div class="workflow-copy">
+        <p class="eyebrow">03 / three human-sized steps</p>
+        <h2 id="workflow-title">Your data. Your cut.<br><span>Your call.</span></h2>
+        <ol class="steps">
+          <li><span class="step-index">1</span><div><h3>Approve a daily cut</h3><p>Add the date and limit to <code>config/daily_cuts.json</code>. No APPROVED entry? It fails closed.</p></div></li>
+          <li><span class="step-index">2</span><div><h3>Prepare a manual pull</h3><p>Use a JSON pull document. Keep record IDs unique; unverified rows can be included for review, but don’t count.</p></div></li>
+          <li><span class="step-index">3</span><div><h3>Run the evaluation</h3><p>Get a JSON summary with verified totals, percentage, signals, and reasons for excluded rows.</p></div></li>
+        </ol>
+      </div>
+      <div class="terminal-card" aria-label="Example command line">
+        <div class="terminal-bar"><div class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></div><span>LOCAL TERMINAL</span><span class="terminal-lock">NO NETWORK REQUIRED</span></div>
+        <pre><code><span class="terminal-prompt">$</span> PYTHONPATH=src python -m token_moderation.cli evaluate \
+    --date 2026-10-27 \
+    --cuts config/daily_cuts.json \
+    --pull examples/manual-pull.example.json \
+    --policy config/policy.json</code></pre>
+        <div class="terminal-foot"><span class="terminal-live"></span> Prints JSON to your terminal <span class="terminal-foot-right">Python 3.10+</span></div>
+      </div>
+    </section>
+
+    <section class="human-section section-wrap" aria-labelledby="human-title">
+      <figure class="human-art">
+        <img src="./assets/verified-only-comic.webp" alt="A tiny auditor snail carefully checks paper usage receipts; one verified receipt gets a green check while two others are set aside.">
+      </figure>
+      <div class="human-copy">
+        <p class="eyebrow">04 / before you go</p>
+        <h2 id="human-title">A report, not a robot with a red button.</h2>
+        <p>The CLI doesn’t change quotas, block requests, approve cuts, or take action on your behalf. It gives you a small, legible checkpoint and leaves the call to you.</p>
+        <div class="honest-badge"><span aria-hidden="true">✳</span><span><strong>Honest by default</strong><br>No services connected. No automatic controls enabled.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-wrap">
+    <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="3" y="3" width="34" height="34" rx="11" fill="currentColor"/><path d="M12 14h16M20 11v18M13 25h14" fill="none" stroke="#101923" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#ff795d"/></svg></span><span class="brand-name">token usage <b>moderation</b></span></a>
+    <p>Measure carefully. Decide like a human.</p>
+    <a class="back-top" href="#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>
